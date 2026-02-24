@@ -6,6 +6,14 @@ import artwork5 from "@/assets/artwork-5.jpg";
 import artwork6 from "@/assets/artwork-6.jpg";
 import artwork7 from "@/assets/artwork-7.jpg";
 import artwork8 from "@/assets/artwork-8.jpg";
+import artwork9 from "@/assets/artwork-9.jpg";
+import artwork10 from "@/assets/artwork-10.jpg";
+import artwork11 from "@/assets/artwork-11.jpg";
+import artwork12 from "@/assets/artwork-12.jpg";
+import artwork13 from "@/assets/artwork-13.jpg";
+import artwork14 from "@/assets/artwork-14.jpg";
+import artwork15 from "@/assets/artwork-15.jpg";
+import artwork16 from "@/assets/artwork-16.jpg";
 
 export interface Artwork {
   id: string;
@@ -115,6 +123,102 @@ export const artworks: Artwork[] = [
     sold: false,
     image: artwork8,
     description: "An impressionistic journey through color and light, where sunset hues melt into reflective waters, blurring the boundary between sky and earth.",
+    category: "Landscape",
+  },
+  {
+    id: "9",
+    title: "Crimson & Gold",
+    year: "2025",
+    medium: "Oil & Gold Leaf on Canvas",
+    dimensions: "140 × 100 cm",
+    price: 9200,
+    sold: false,
+    image: artwork9,
+    description: "A bold statement in crimson and metallic gold, where thick impasto layers create a dramatic interplay of passion and luxury.",
+    category: "Abstract",
+  },
+  {
+    id: "10",
+    title: "Misty Peaks",
+    year: "2024",
+    medium: "Watercolor on Paper",
+    dimensions: "80 × 60 cm",
+    price: 2800,
+    sold: false,
+    image: artwork10,
+    description: "Ethereal mountain ranges dissolve into soft mist, evoking a meditative calm through delicate washes of blue and grey.",
+    category: "Landscape",
+  },
+  {
+    id: "11",
+    title: "Emerald Canopy",
+    year: "2025",
+    medium: "Acrylic & Gold Leaf on Canvas",
+    dimensions: "110 × 90 cm",
+    price: 5800,
+    sold: false,
+    image: artwork11,
+    description: "Lush foliage rendered in rich emerald tones with subtle gold accents, celebrating the abundant beauty of the natural world.",
+    category: "Botanical",
+  },
+  {
+    id: "12",
+    title: "Tempest",
+    year: "2025",
+    medium: "Oil on Canvas",
+    dimensions: "160 × 120 cm",
+    price: 8800,
+    sold: false,
+    image: artwork12,
+    description: "The raw power of ocean waves captured in swirling navy and white, a fluid meditation on nature's untameable energy.",
+    category: "Abstract",
+  },
+  {
+    id: "13",
+    title: "Sienna Construct",
+    year: "2024",
+    medium: "Mixed Media on Canvas",
+    dimensions: "100 × 80 cm",
+    price: 4200,
+    sold: true,
+    image: artwork13,
+    description: "Warm terracotta and burnt orange geometric forms create a structured composition evoking ancient architecture and earthen warmth.",
+    category: "Minimalist",
+  },
+  {
+    id: "14",
+    title: "Sakura Whisper",
+    year: "2025",
+    medium: "Watercolor on Silk",
+    dimensions: "70 × 50 cm",
+    price: 3200,
+    sold: false,
+    image: artwork14,
+    description: "Delicate cherry blossoms float on ivory silk, a whisper of spring rendered with Japanese-inspired sensitivity and grace.",
+    category: "Botanical",
+  },
+  {
+    id: "15",
+    title: "Violet Nebula",
+    year: "2025",
+    medium: "Acrylic & Resin on Canvas",
+    dimensions: "120 × 120 cm",
+    price: 6500,
+    sold: false,
+    image: artwork15,
+    description: "Cosmic purple and silver tones swirl in fluid harmony, evoking the infinite depths of distant nebulae and starlight.",
+    category: "Abstract",
+  },
+  {
+    id: "16",
+    title: "Autumn Cathedral",
+    year: "2024",
+    medium: "Oil on Canvas",
+    dimensions: "130 × 100 cm",
+    price: 5500,
+    sold: false,
+    image: artwork16,
+    description: "Golden light floods through autumn canopy, transforming an ordinary forest path into a cathedral of amber and gold.",
     category: "Landscape",
   },
 ];

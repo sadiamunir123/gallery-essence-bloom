@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Palette, Frame, BookOpen, Users } from "lucide-react";
-import Navigation from "@/components/Navigation";
+import Sidebar from "@/components/Sidebar";
 
 const services = [
   {
@@ -32,9 +32,9 @@ const services = [
 const Services = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Navigation variant="dark" />
+      <Sidebar />
 
-      <main className="pt-28 pb-20 px-8 md:px-16 max-w-5xl mx-auto">
+      <main className="md:ml-56 pt-16 md:pt-12 pb-20 px-6 md:px-12 max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
