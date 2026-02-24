@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import logo from "@/assets/logo.jpeg";
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -24,13 +25,7 @@ const Navigation = ({ variant = "dark" }: NavigationProps) => {
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-16 py-6">
         <Link to="/" className="z-50">
-          <h1
-            className={`font-display text-xl md:text-2xl font-medium tracking-wide ${
-              isLight ? "text-gallery-text" : "text-foreground"
-            }`}
-          >
-            Sadia Munir
-          </h1>
+          <img src={logo} alt="HAQ Arts" className="h-10 md:h-12 w-auto" />
         </Link>
 
         {/* Desktop Nav */}
