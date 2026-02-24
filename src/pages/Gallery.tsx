@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { artworks } from "@/data/artworks";
-import Navigation from "@/components/Navigation";
+import Sidebar from "@/components/Sidebar";
 
 const categories = ["All", ...new Set(artworks.map((a) => a.category))];
 
@@ -16,9 +16,9 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation variant="dark" />
+      <Sidebar />
 
-      <main className="pt-28 pb-20 px-8 md:px-16">
+      <main className="md:ml-56 pt-16 md:pt-12 pb-20 px-6 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -50,13 +50,13 @@ const Gallery = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((artwork, i) => (
             <motion.div
               key={artwork.id}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
             >
               <Link to={`/gallery/${artwork.id}`} className="group block">
                 <div className="relative overflow-hidden mb-4">

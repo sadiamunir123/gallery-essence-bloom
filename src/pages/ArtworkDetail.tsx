@@ -3,7 +3,7 @@ import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ZoomIn, ZoomOut, Maximize2, X } from "lucide-react";
 import { artworks } from "@/data/artworks";
-import Navigation from "@/components/Navigation";
+import Sidebar from "@/components/Sidebar";
 
 const ArtworkDetail = () => {
   const { id } = useParams();
@@ -59,9 +59,9 @@ const ArtworkDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation variant="dark" />
+      <Sidebar />
 
-      <main className="pt-28 pb-20 px-8 md:px-16">
+      <main className="md:ml-56 pt-16 md:pt-12 pb-20 px-6 md:px-12">
         <Link
           to="/gallery"
           className="inline-flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
@@ -70,7 +70,7 @@ const ArtworkDetail = () => {
           Back to Gallery
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Image */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -134,8 +134,7 @@ const ArtworkDetail = () => {
 
       {/* Zoom Overlay */}
       {zoomOpen && (
-        <div className="fixed inset-0 z-50 bg-gallery-overlay flex flex-col">
-          {/* Controls */}
+        <div className="fixed inset-0 z-[70] bg-gallery-overlay flex flex-col">
           <div className="flex items-center justify-between px-6 py-4">
             <p className="font-display text-gallery-text text-lg">
               {artwork.title}
@@ -156,7 +155,6 @@ const ArtworkDetail = () => {
             </div>
           </div>
 
-          {/* Zoomable Image */}
           <div
             ref={containerRef}
             className="flex-1 overflow-hidden cursor-grab active:cursor-grabbing zoom-container flex items-center justify-center"
