@@ -3,7 +3,8 @@ import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ZoomIn, ZoomOut, Maximize2, X } from "lucide-react";
 import { artworks } from "@/data/artworks";
-import Sidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const ArtworkDetail = () => {
   const { id } = useParams();
@@ -21,10 +22,7 @@ const ArtworkDetail = () => {
 
   const handleWheel = useCallback((e: React.WheelEvent) => {
     e.preventDefault();
-    setScale((s) => {
-      const newScale = s - e.deltaY * 0.002;
-      return Math.max(1, Math.min(5, newScale));
-    });
+    setScale((s) => Math.max(1, Math.min(5, s - e.deltaY * 0.002)));
   }, []);
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -43,15 +41,12 @@ const ArtworkDetail = () => {
   };
 
   const handleMouseUp = () => setDragging(false);
-
-  const resetZoom = () => {
-    setScale(1);
-    setPosition({ x: 0, y: 0 });
-  };
+  const resetZoom = () => { setScale(1); setPosition({ x: 0, y: 0 }); };
 
   if (!artwork) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
+        <Navbar />
         <p className="font-body text-muted-foreground">Artwork not found</p>
       </div>
     );
@@ -59,102 +54,90 @@ const ArtworkDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Sidebar />
+      <Navbar />
 
-      <main className="md:ml-56 pt-16 md:pt-12 pb-20 px-6 md:px-12">
-        <Link
-          to="/gallery"
-          className="inline-flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
-        >
-          <ArrowLeft size={16} />
-          Back to Gallery
-        </Link>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="relative group"
+      <main className="pt-28 md:pt-32 pb-20 px-5 md:px-10">
+        <div className="max-w-7xl mx-auto">
+          <Link
+            to="/gallery"
+            className="inline-flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
           >
-            <img
-              src={artwork.image}
-              alt={artwork.title}
-              className="w-full object-cover"
-            />
-            <button
-              onClick={() => { setZoomOpen(true); resetZoom(); }}
-              className="absolute bottom-4 right-4 bg-foreground/70 text-primary-foreground p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              aria-label="Open zoom viewer"
+            <ArrowLeft size={16} />
+            Back to Gallery
+          </Link>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8 }}
+              className="relative group"
             >
-              <Maximize2 size={18} />
-            </button>
-          </motion.div>
+              <img src={artwork.image} alt={artwork.title} className="w-full object-cover" />
+              <button
+                onClick={() => { setZoomOpen(true); resetZoom(); }}
+                className="absolute bottom-4 right-4 bg-[hsl(0,0%,3%)]/70 text-white p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                aria-label="Open zoom viewer"
+              >
+                <Maximize2 size={18} />
+              </button>
+            </motion.div>
 
-          {/* Details */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col justify-center"
-          >
-            <p className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground mb-3">
-              {artwork.category}
-            </p>
-            <h1 className="font-display text-3xl md:text-5xl font-medium mb-4">
-              {artwork.title}
-            </h1>
-            <p className="font-accent text-lg text-muted-foreground italic mb-6">
-              {artwork.medium} · {artwork.dimensions} · {artwork.year}
-            </p>
-            <p className="font-body text-base text-muted-foreground leading-relaxed mb-8 max-w-md">
-              {artwork.description}
-            </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col justify-center"
+            >
+              <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-3">
+                {artwork.category}
+              </p>
+              <h1 className="font-display text-3xl md:text-5xl font-medium mb-4">
+                {artwork.title}
+              </h1>
+              <p className="font-accent text-lg text-muted-foreground italic mb-6">
+                {artwork.medium} · {artwork.dimensions} · {artwork.year}
+              </p>
+              <p className="font-body text-base text-muted-foreground leading-relaxed mb-8 max-w-md">
+                {artwork.description}
+              </p>
 
-            {artwork.sold ? (
-              <div className="font-body text-sm tracking-[0.2em] uppercase text-muted-foreground border border-border px-6 py-3 w-fit">
-                Sold
-              </div>
-            ) : (
-              <div>
-                {artwork.price && (
-                  <p className="font-display text-2xl mb-4">
-                    ${artwork.price.toLocaleString()}
-                  </p>
-                )}
-                <button className="font-body text-sm tracking-[0.2em] uppercase bg-foreground text-primary-foreground px-8 py-3 hover:opacity-80 transition-opacity">
-                  Inquire
-                </button>
-              </div>
-            )}
-          </motion.div>
+              {artwork.sold ? (
+                <div className="font-body text-sm tracking-[0.2em] uppercase text-muted-foreground border border-border px-6 py-3 w-fit">
+                  Sold
+                </div>
+              ) : (
+                <div>
+                  {artwork.price && (
+                    <p className="font-display text-2xl mb-4">
+                      ${artwork.price.toLocaleString()}
+                    </p>
+                  )}
+                  <Link
+                    to="/contact"
+                    className="inline-block font-body text-sm tracking-[0.2em] uppercase bg-foreground text-primary-foreground px-8 py-3 hover:opacity-80 transition-opacity"
+                  >
+                    Inquire
+                  </Link>
+                </div>
+              )}
+            </motion.div>
+          </div>
         </div>
       </main>
 
       {/* Zoom Overlay */}
       {zoomOpen && (
-        <div className="fixed inset-0 z-[70] bg-gallery-overlay flex flex-col">
+        <div className="fixed inset-0 z-[70] bg-[hsl(0,0%,3%)] flex flex-col">
           <div className="flex items-center justify-between px-6 py-4">
-            <p className="font-display text-gallery-text text-lg">
-              {artwork.title}
-            </p>
+            <p className="font-display text-white text-lg">{artwork.title}</p>
             <div className="flex items-center gap-4">
-              <button onClick={handleZoomOut} className="text-gallery-text/70 hover:text-gallery-text transition-colors" aria-label="Zoom out">
-                <ZoomOut size={20} />
-              </button>
-              <span className="font-body text-sm text-gallery-text/50">
-                {Math.round(scale * 100)}%
-              </span>
-              <button onClick={handleZoomIn} className="text-gallery-text/70 hover:text-gallery-text transition-colors" aria-label="Zoom in">
-                <ZoomIn size={20} />
-              </button>
-              <button onClick={() => setZoomOpen(false)} className="text-gallery-text/70 hover:text-gallery-text transition-colors ml-4" aria-label="Close">
-                <X size={20} />
-              </button>
+              <button onClick={handleZoomOut} className="text-white/50 hover:text-white transition-colors"><ZoomOut size={20} /></button>
+              <span className="font-body text-sm text-white/40">{Math.round(scale * 100)}%</span>
+              <button onClick={handleZoomIn} className="text-white/50 hover:text-white transition-colors"><ZoomIn size={20} /></button>
+              <button onClick={() => setZoomOpen(false)} className="text-white/50 hover:text-white transition-colors ml-4"><X size={20} /></button>
             </div>
           </div>
-
           <div
             ref={containerRef}
             className="flex-1 overflow-hidden cursor-grab active:cursor-grabbing zoom-container flex items-center justify-center"
@@ -177,6 +160,8 @@ const ArtworkDetail = () => {
           </div>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 };
