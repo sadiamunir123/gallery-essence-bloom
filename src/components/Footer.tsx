@@ -9,9 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
           {/* Brand */}
           <div className="md:col-span-2">
-            <h3 className="font-display text-xl tracking-[0.15em] uppercase text-white font-medium mb-4">
-              HAQ<span className="font-accent text-[hsl(var(--accent))] ml-1 italic font-light tracking-normal lowercase text-lg">Arts</span>
-            </h3>
+            <img src={haqLogo} alt="HAQ Arts" className="h-12 w-auto mb-4" />
             <p className="font-body text-sm leading-relaxed max-w-sm mb-6">
               Contemporary art by Sadia Munir — exploring emotion, texture, and color through oil, mixed media, and gold leaf.
             </p>

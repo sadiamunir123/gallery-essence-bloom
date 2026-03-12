@@ -63,15 +63,7 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <h1 className="font-display text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold text-white tracking-tight leading-none mb-2">
-              HAQ
-            </h1>
-            <div className="flex items-center justify-center gap-0 mb-3">
-              <div className="logo-stripe h-[3px] w-20 md:w-32 rounded-full" />
-            </div>
-            <p className="font-body text-xs md:text-sm tracking-[0.4em] uppercase text-white/50 mb-6">
-              Arts
-            </p>
+            <img src={haqLogo} alt="HAQ Arts" className="h-24 sm:h-32 md:h-40 lg:h-48 w-auto mx-auto mb-6" />
             <p className="font-accent text-lg md:text-2xl lg:text-3xl text-white/60 italic max-w-xl mx-auto mb-10 leading-relaxed">
               Exploring Depth, Color & Emotion
             </p>
