@@ -8,37 +8,26 @@
   :root {
     --background: 40 33% 97%;
     --foreground: 30 10% 15%;
-
     --card: 40 30% 95%;
     --card-foreground: 30 10% 15%;
-
     --popover: 40 33% 97%;
     --popover-foreground: 30 10% 15%;
-
     --primary: 30 10% 15%;
     --primary-foreground: 40 33% 97%;
-
     --secondary: 35 20% 90%;
     --secondary-foreground: 30 10% 25%;
-
     --muted: 35 15% 92%;
     --muted-foreground: 30 8% 50%;
-
     --accent: 38 60% 55%;
     --accent-foreground: 30 10% 10%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 35 15% 85%;
     --input: 35 15% 85%;
     --ring: 38 60% 55%;
-
     --radius: 0.25rem;
-
     --gallery-overlay: 30 10% 8%;
     --gallery-text: 40 30% 95%;
-
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -47,10 +36,13 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-
     --font-display: 'Playfair Display', serif;
     --font-body: 'Outfit', sans-serif;
     --font-accent: 'Cormorant Garamond', serif;
+
+    /* Premium UI tokens */
+    --glow-accent: 38 60% 55%;
+    --hero-overlay: 0 0% 3%;
   }
 
   .dark {
@@ -88,11 +80,9 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground font-body antialiased;
   }
-
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
   }
@@ -110,7 +100,7 @@
   }
 }
 
-/* Custom scrollbar for zoom viewer */
+/* Custom scrollbar */
 .zoom-container::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -121,4 +111,48 @@
 .zoom-container::-webkit-scrollbar-thumb {
   background: hsl(var(--muted-foreground) / 0.3);
   border-radius: 3px;
+}
+
+/* Artwork card glow on hover */
+.artwork-card {
+  transition: box-shadow 0.5s ease, transform 0.5s ease;
+}
+.artwork-card:hover {
+  box-shadow: 0 8px 40px -8px hsl(var(--glow-accent) / 0.25), 0 0 0 1px hsl(var(--glow-accent) / 0.08);
+  transform: translateY(-4px);
+}
+
+/* Custom cursor for artwork images */
+.artwork-cursor {
+  cursor: crosshair;
+}
+
+/* Smooth page fade */
+.page-enter {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Scroll indicator pulse */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+.scroll-indicator {
+  animation: scroll-bounce 2s ease-in-out infinite;
+}
+
+/* Subtle grain texture overlay */
+.grain-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Logo color stripe */
+.logo-stripe {
+  background: linear-gradient(90deg, hsl(0, 80%, 50%) 0%, hsl(0, 80%, 50%) 33%, hsl(45, 90%, 50%) 33%, hsl(45, 90%, 50%) 66%, hsl(220, 80%, 50%) 66%, hsl(220, 80%, 50%) 100%);
 }

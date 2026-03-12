@@ -35,7 +35,6 @@ const Navbar = () => {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -65,15 +64,21 @@ const Navbar = () => {
             : "bg-[hsl(0,0%,3%)]"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-5 md:px-10">
-          {/* Logo Text */}
-          <Link to="/" className="flex-shrink-0 py-5">
-            <h1 className="font-display text-xl md:text-2xl tracking-[0.15em] uppercase text-white font-medium">
-              HAQ<span className="font-accent text-[hsl(var(--accent))] ml-1 italic font-light tracking-normal lowercase text-lg md:text-xl">Arts</span>
-            </h1>
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-5 md:px-10 h-16 md:h-20">
+          {/* Logo */}
+          <Link to="/" className="flex-shrink-0 flex flex-col items-start leading-none">
+            <span className="font-display text-2xl md:text-3xl font-bold tracking-tight text-white" style={{ lineHeight: 1 }}>
+              HAQ
+            </span>
+            <div className="flex items-center gap-0 mt-0.5">
+              <div className="logo-stripe h-[2px] w-12 md:w-16 rounded-full" />
+            </div>
+            <span className="font-body text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-white/60 mt-0.5">
+              Arts
+            </span>
           </Link>
 
-          {/* Desktop Nav Links */}
+          {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
@@ -82,9 +87,7 @@ const Navbar = () => {
                   key={item.path}
                   to={item.path}
                   className={`relative px-4 py-2 font-body text-[11px] tracking-[0.2em] uppercase transition-all duration-300 ${
-                    isActive
-                      ? "text-white"
-                      : "text-white/50 hover:text-white/80"
+                    isActive ? "text-white" : "text-white/50 hover:text-white/80"
                   }`}
                 >
                   {item.label}
@@ -100,7 +103,7 @@ const Navbar = () => {
             })}
           </div>
 
-          {/* Right: Search + Mobile Toggle */}
+          {/* Right */}
           <div className="flex items-center gap-1">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
@@ -109,7 +112,6 @@ const Navbar = () => {
             >
               {searchOpen ? <X size={18} /> : <Search size={18} />}
             </button>
-
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="md:hidden p-2.5 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-all duration-300"
@@ -129,14 +131,11 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="fixed left-0 right-0 z-40 bg-[hsl(0,0%,5%)]/98 backdrop-blur-xl border-b border-white/10 top-[64px]"
+            className="fixed left-0 right-0 z-40 bg-[hsl(0,0%,5%)]/98 backdrop-blur-xl border-b border-white/10 top-16 md:top-20"
           >
             <div className="max-w-xl mx-auto px-5 py-6">
               <div className="relative">
-                <Search
-                  size={16}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30"
-                />
+                <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
                 <input
                   ref={searchRef}
                   type="text"
@@ -146,7 +145,6 @@ const Navbar = () => {
                   className="w-full pl-11 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--accent))]/40 transition-all"
                 />
               </div>
-
               {searchQuery.trim() && (
                 <div className="mt-4 max-h-64 overflow-y-auto">
                   {searchResults.length > 0 ? (
@@ -157,26 +155,16 @@ const Navbar = () => {
                           onClick={() => handleResultClick(artwork.id)}
                           className="w-full flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-white/5 transition-colors text-left"
                         >
-                          <img
-                            src={artwork.image}
-                            alt={artwork.title}
-                            className="w-11 h-11 object-cover rounded"
-                          />
+                          <img src={artwork.image} alt={artwork.title} className="w-11 h-11 object-cover rounded" />
                           <div>
-                            <p className="font-display text-sm font-medium text-white">
-                              {artwork.title}
-                            </p>
-                            <p className="font-body text-xs text-white/40">
-                              {artwork.category} · {artwork.medium}
-                            </p>
+                            <p className="font-display text-sm font-medium text-white">{artwork.title}</p>
+                            <p className="font-body text-xs text-white/40">{artwork.category} · {artwork.medium}</p>
                           </div>
                         </button>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-center text-white/40 font-body text-sm py-6">
-                      No results for "{searchQuery}"
-                    </p>
+                    <p className="text-center text-white/40 font-body text-sm py-6">No results for "{searchQuery}"</p>
                   )}
                 </div>
               )}
@@ -213,10 +201,7 @@ const Navbar = () => {
                   >
                     {item.label}
                     {isActive && (
-                      <motion.div
-                        layoutId="mobile-active"
-                        className="h-[2px] bg-[hsl(var(--accent))] mt-1"
-                      />
+                      <motion.div layoutId="mobile-active" className="h-[2px] bg-[hsl(var(--accent))] mt-1" />
                     )}
                   </Link>
                 </motion.div>
