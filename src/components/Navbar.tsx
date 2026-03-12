@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Search } from "lucide-react";
 import { artworks } from "@/data/artworks";
+import haqLogo from "@/assets/haq-arts-logo.jpeg";
 
 const navItems = [
   { label: "Home", path: "/" },
