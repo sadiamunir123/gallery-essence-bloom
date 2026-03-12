@@ -7,6 +7,7 @@ import { blogPosts } from "@/data/blogPosts";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import artwork5 from "@/assets/artwork-5.jpg";
+import haqLogo from "@/assets/haq-arts-logo.jpeg";
 
 const heroArtworks = artworks.slice(0, 5);
 const featuredArtworks = artworks.filter((a) => !a.sold).slice(0, 5);
