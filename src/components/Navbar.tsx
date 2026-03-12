@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Search } from "lucide-react";
 import { artworks } from "@/data/artworks";
+import haqLogo from "@/assets/haq-arts-logo.jpeg";
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -66,16 +67,8 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-5 md:px-10 h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0 flex flex-col items-start leading-none">
-            <span className="font-display text-2xl md:text-3xl font-bold tracking-tight text-white" style={{ lineHeight: 1 }}>
-              HAQ
-            </span>
-            <div className="flex items-center gap-0 mt-0.5">
-              <div className="logo-stripe h-[2px] w-12 md:w-16 rounded-full" />
-            </div>
-            <span className="font-body text-[9px] md:text-[10px] tracking-[0.35em] uppercase text-white/60 mt-0.5">
-              Arts
-            </span>
+          <Link to="/" className="flex-shrink-0">
+            <img src={haqLogo} alt="HAQ Arts" className="h-10 md:h-12 w-auto" />
           </Link>
 
           {/* Desktop Nav */}
