@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Instagram, Mail, Phone } from "lucide-react";
+import haqLogo from "@/assets/haq-arts-logo.jpeg";
 
 const Footer = () => {
   return (
