@@ -1,15 +1,14 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Search } from "lucide-react";
+import { MoreVertical, X, Search } from "lucide-react";
 import { artworks } from "@/data/artworks";
 import haqLogo from "@/assets/haq-arts-logo.png";
 
 const navItems = [
-  { label: "Home", path: "/" },
   { label: "Gallery", path: "/gallery" },
-  { label: "About", path: "/about" },
   { label: "Services", path: "/services" },
+  { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" },
 ];
 
@@ -110,7 +109,7 @@ const Navbar = () => {
               className="md:hidden p-2.5 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-all duration-300"
               aria-label="Toggle menu"
             >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileOpen ? <X size={20} /> : <MoreVertical size={20} />}
             </button>
           </div>
         </div>
