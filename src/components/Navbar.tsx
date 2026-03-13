@@ -1,15 +1,14 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Search } from "lucide-react";
+import { MoreVertical, X, Search } from "lucide-react";
 import { artworks } from "@/data/artworks";
 import haqLogo from "@/assets/haq-arts-logo.png";
 
 const navItems = [
-  { label: "Home", path: "/" },
   { label: "Gallery", path: "/gallery" },
-  { label: "About", path: "/about" },
   { label: "Services", path: "/services" },
+  { label: "About", path: "/about" },
   { label: "Contact", path: "/contact" },
 ];
 
