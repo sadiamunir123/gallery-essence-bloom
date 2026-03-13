@@ -109,7 +109,7 @@ const Navbar = () => {
               className="md:hidden p-2.5 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-all duration-300"
               aria-label="Toggle menu"
             >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              {mobileOpen ? <X size={20} /> : <MoreVertical size={20} />}
             </button>
           </div>
         </div>
