@@ -1,9 +1,9 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MoreVertical, X, Search } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { artworks } from "@/data/artworks";
-import haqLogo from "@/assets/haq-arts-logo.png";
+import haqLogo from "@/assets/haq-arts-logo.jpeg";
 
 const navItems = [
   { label: "Gallery", path: "/gallery" },
