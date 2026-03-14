@@ -64,7 +64,7 @@ const Gallery = () => {
                 transition={{ duration: 0.5, delay: i * 0.05 }}
               >
                 <Link to={`/gallery/${artwork.id}`} className="group block">
-                  <div className="relative overflow-hidden mb-4">
+                  <div className="relative overflow-hidden mb-2 sm:mb-4">
                     <img
                       src={artwork.image}
                       alt={artwork.title}
