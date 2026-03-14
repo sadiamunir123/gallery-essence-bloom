@@ -5,10 +5,10 @@ import haqLogo from "@/assets/haq-arts-logo.jpeg";
 const Footer = () => {
   return (
     <footer className="bg-[hsl(0,0%,3%)] text-white/60 border-t border-white/5">
-      <div className="max-w-7xl mx-auto px-5 md:px-10 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 md:px-10 py-10 sm:py-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-8">
           {/* Brand */}
-          <div className="md:col-span-2">
+          <div className="col-span-2 md:col-span-2">
             <img src={haqLogo} alt="HAQ Arts" className="h-12 w-auto mb-4" />
             <p className="font-body text-sm leading-relaxed max-w-sm mb-6">
               Contemporary art by Sadia Munir — exploring emotion, texture, and color through oil, mixed media, and gold leaf.
@@ -58,7 +58,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/5 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-white/5 mt-8 sm:mt-12 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
           <p className="font-body text-xs text-white/30">
             © {new Date().getFullYear()} HAQ Arts. All rights reserved.
           </p>

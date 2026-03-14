@@ -7,17 +7,17 @@ const About = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <main className="pt-28 md:pt-32 pb-20 px-5 md:px-10">
+      <main className="pt-20 sm:pt-28 md:pt-32 pb-12 sm:pb-20 px-4 sm:px-5 md:px-10">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-3">
+            <p className="font-body text-[9px] sm:text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-2 sm:mb-3">
               The Artist
             </p>
-            <h1 className="font-display text-4xl md:text-6xl font-medium mb-8">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-6xl font-medium mb-6 sm:mb-8">
               Sadia Munir
             </h1>
           </motion.div>
@@ -28,7 +28,7 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6"
           >
-            <p className="font-accent text-xl md:text-2xl text-muted-foreground italic leading-relaxed">
+            <p className="font-accent text-lg sm:text-xl md:text-2xl text-muted-foreground italic leading-relaxed">
               "Art is the bridge between the visible world and the invisible
               emotions that shape our inner lives."
             </p>
@@ -66,15 +66,15 @@ const About = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-20"
+            className="mt-12 sm:mt-20"
           >
-            <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-3">
+            <p className="font-body text-[9px] sm:text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-2 sm:mb-3">
               Research
             </p>
-            <h2 className="font-display text-3xl md:text-4xl font-medium mb-6">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-medium mb-4 sm:mb-6">
               Artist's Thesis
             </h2>
-            <div className="bg-card p-8 md:p-12 border border-border">
+            <div className="bg-card p-5 sm:p-8 md:p-12 border border-border">
               <h3 className="font-display text-xl mb-4 italic">
                 "The Emotional Landscape: Materiality and Meaning in
                 Contemporary Abstract Painting"
