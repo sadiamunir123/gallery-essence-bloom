@@ -154,7 +154,7 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 font-body text-sm tracking-[0.2em] uppercase bg-foreground text-primary-foreground px-8 py-3.5 hover:opacity-80 transition-opacity"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 font-body text-sm tracking-[0.2em] uppercase bg-foreground text-primary-foreground px-8 py-3.5 hover:opacity-80 transition-opacity active:scale-[0.98]"
               >
                 <Send size={14} />
                 Send Message

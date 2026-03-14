@@ -78,14 +78,14 @@ const Gallery = () => {
                       </div>
                     )}
                   </div>
-                  <h3 className="font-display text-lg font-medium mb-1 group-hover:text-accent transition-colors duration-300">
+                  <h3 className="font-display text-sm sm:text-lg font-medium mb-0.5 sm:mb-1 group-hover:text-accent transition-colors duration-300 line-clamp-1">
                     {artwork.title}
                   </h3>
-                  <p className="font-accent text-sm text-muted-foreground italic">
+                  <p className="font-accent text-xs sm:text-sm text-muted-foreground italic">
                     {artwork.medium}, {artwork.year}
                   </p>
                   {artwork.price && !artwork.sold && (
-                    <p className="font-body text-sm text-muted-foreground mt-1">
+                    <p className="font-body text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">
                       ${artwork.price.toLocaleString()}
                     </p>
                   )}

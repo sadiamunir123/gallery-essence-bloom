@@ -58,7 +58,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-white/5 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-white/5 mt-8 sm:mt-12 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
           <p className="font-body text-xs text-white/30">
             © {new Date().getFullYear()} HAQ Arts. All rights reserved.
           </p>

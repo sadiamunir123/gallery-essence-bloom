@@ -82,7 +82,7 @@ const Services = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="mt-20 text-center"
+            className="mt-12 sm:mt-20 text-center"
           >
             <p className="font-accent text-xl text-muted-foreground italic mb-6">
               Interested in working together?
