@@ -28,7 +28,7 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6"
           >
-            <p className="font-accent text-xl md:text-2xl text-muted-foreground italic leading-relaxed">
+            <p className="font-accent text-lg sm:text-xl md:text-2xl text-muted-foreground italic leading-relaxed">
               "Art is the bridge between the visible world and the invisible
               emotions that shape our inner lives."
             </p>
