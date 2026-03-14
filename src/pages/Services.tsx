@@ -61,7 +61,7 @@ const Services = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.12 }}
-                className="p-8 md:p-10 border border-border bg-card hover:border-accent/30 transition-all duration-300"
+                className="p-6 sm:p-8 md:p-10 border border-border bg-card hover:border-accent/30 transition-all duration-300"
               >
                 <service.icon
                   size={28}
