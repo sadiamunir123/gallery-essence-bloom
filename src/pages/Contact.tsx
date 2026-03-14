@@ -22,20 +22,20 @@ const Contact = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <main className="pt-28 md:pt-32 pb-20 px-5 md:px-10">
+      <main className="pt-20 sm:pt-28 md:pt-32 pb-12 sm:pb-20 px-4 sm:px-5 md:px-10">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-3">
+            <p className="font-body text-[9px] sm:text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-2 sm:mb-3">
               Get in Touch
             </p>
-            <h1 className="font-display text-4xl md:text-5xl font-medium mb-2">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-medium mb-1.5 sm:mb-2">
               Contact
             </h1>
-            <p className="font-accent text-lg text-muted-foreground italic mb-16">
+            <p className="font-accent text-base sm:text-lg text-muted-foreground italic mb-10 sm:mb-16">
               I'd love to hear from you
             </p>
           </motion.div>
