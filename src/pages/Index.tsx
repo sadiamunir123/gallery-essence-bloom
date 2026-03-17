@@ -1,29 +1,30 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { artworks } from "@/data/artworks";
+import { useArtworks } from "@/hooks/use-artworks";
 import Navbar from "@/components/Navbar";
 
-const heroArtworks = artworks.slice(0, 5);
-
 const Index = () => {
+  const { data: artworks = [] } = useArtworks();
+  const heroArtworks = artworks.slice(0, 5);
   const [current, setCurrent] = useState(0);
   const touchStart = useRef<number | null>(null);
   const touchEnd = useRef<number | null>(null);
   const minSwipeDistance = 50;
 
   const next = useCallback(() => {
-    setCurrent((p) => (p + 1) % heroArtworks.length);
-  }, []);
+    setCurrent((p) => (heroArtworks.length ? (p + 1) % heroArtworks.length : 0));
+  }, [heroArtworks.length]);
 
   const prev = useCallback(() => {
-    setCurrent((p) => (p - 1 + heroArtworks.length) % heroArtworks.length);
-  }, []);
+    setCurrent((p) => (heroArtworks.length ? (p - 1 + heroArtworks.length) % heroArtworks.length : 0));
+  }, [heroArtworks.length]);
 
   useEffect(() => {
+    if (!heroArtworks.length) return;
     const interval = setInterval(next, 6000);
     return () => clearInterval(interval);
-  }, [next]);
+  }, [next, heroArtworks.length]);
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchEnd.current = null;
@@ -44,6 +45,15 @@ const Index = () => {
     touchEnd.current = null;
   };
 
+  if (!heroArtworks.length) {
+    return (
+      <div className="h-[100dvh] w-screen bg-[hsl(0,0%,3%)] flex items-center justify-center">
+        <Navbar />
+        <p className="font-body text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
+
   const artwork = heroArtworks[current];
 
   return (
@@ -55,7 +65,6 @@ const Index = () => {
     >
       <Navbar />
 
-      {/* Full-screen slideshow background */}
       <AnimatePresence mode="wait">
         <motion.div
           key={artwork.id}
@@ -66,7 +75,7 @@ const Index = () => {
           className="absolute inset-0"
         >
           <img
-            src={artwork.image}
+            src={artwork.image_url}
             alt={artwork.title}
             className="h-full w-full object-cover"
           />
@@ -75,7 +84,6 @@ const Index = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Artwork info overlay */}
       <AnimatePresence mode="wait">
         <motion.div
           key={artwork.id + "-info"}
@@ -97,7 +105,6 @@ const Index = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Slide Controls */}
       <div className="absolute bottom-6 sm:bottom-12 left-0 right-0 flex items-center justify-center gap-4 sm:gap-6 z-10">
         <button onClick={prev} className="text-white/40 hover:text-white transition-colors p-1 hidden sm:block" aria-label="Previous">
           <ChevronLeft size={20} />
@@ -119,7 +126,6 @@ const Index = () => {
         </button>
       </div>
 
-      {/* Slide counter */}
       <div className="absolute bottom-6 sm:bottom-12 right-4 sm:right-6 md:right-12 z-10">
         <span className="font-body text-[10px] sm:text-xs tracking-widest text-white/30">
           {String(current + 1).padStart(2, "0")} / {String(heroArtworks.length).padStart(2, "0")}

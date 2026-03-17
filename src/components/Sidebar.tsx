@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Image, User, Briefcase, Search, X, Menu } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
-import { artworks } from "@/data/artworks";
+import { useArtworks } from "@/hooks/use-artworks";
 
 const navItems = [
   { label: "Home", path: "/", icon: Home },
@@ -13,6 +13,7 @@ const navItems = [
 ];
 
 const Sidebar = () => {
+  const { data: artworks = [] } = useArtworks();
   const location = useLocation();
   const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
@@ -202,7 +203,7 @@ const Sidebar = () => {
                         className="w-full flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-muted/60 transition-colors text-left"
                       >
                         <img
-                          src={artwork.image}
+                          src={artwork.image_url}
                           alt={artwork.title}
                           className="w-11 h-11 object-cover rounded"
                         />

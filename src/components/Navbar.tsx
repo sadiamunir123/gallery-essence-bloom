@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Search } from "lucide-react";
-import { artworks } from "@/data/artworks";
+import { useArtworks } from "@/hooks/use-artworks";
 import haqLogo from "@/assets/haq-arts-logo.jpeg";
 
 const navItems = [
@@ -13,6 +13,7 @@ const navItems = [
 ];
 
 const Navbar = () => {
+  const { data: artworks = [] } = useArtworks();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -147,7 +148,7 @@ const Navbar = () => {
                           onClick={() => handleResultClick(artwork.id)}
                           className="w-full flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-white/5 transition-colors text-left"
                         >
-                          <img src={artwork.image} alt={artwork.title} className="w-11 h-11 object-cover rounded" />
+                          <img src={artwork.image_url} alt={artwork.title} className="w-11 h-11 object-cover rounded" />
                           <div>
                             <p className="font-display text-sm font-medium text-white">{artwork.title}</p>
                             <p className="font-body text-xs text-white/40">{artwork.category} · {artwork.medium}</p>

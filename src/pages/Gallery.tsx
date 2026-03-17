@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { artworks } from "@/data/artworks";
+import { useArtworks } from "@/hooks/use-artworks";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const categories = ["All", ...new Set(artworks.map((a) => a.category))];
-
 const Gallery = () => {
+  const { data: artworks = [], isLoading } = useArtworks();
   const [activeCategory, setActiveCategory] = useState("All");
 
+  const categories = ["All", ...new Set(artworks.map((a) => a.category))];
   const filtered =
     activeCategory === "All"
       ? artworks
@@ -37,7 +37,6 @@ const Gallery = () => {
             </p>
           </motion.div>
 
-          {/* Category Filter */}
           <div className="flex flex-wrap gap-2 sm:gap-4 mb-8 sm:mb-12 overflow-x-auto pb-2 -mx-1 px-1">
             {categories.map((cat) => (
               <button
@@ -54,45 +53,48 @@ const Gallery = () => {
             ))}
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
-            {filtered.map((artwork, i) => (
-              <motion.div
-                key={artwork.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
-              >
-                <Link to={`/gallery/${artwork.id}`} className="group block">
-                  <div className="relative overflow-hidden mb-2 sm:mb-4">
-                    <img
-                      src={artwork.image}
-                      alt={artwork.title}
-                      className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-[hsl(0,0%,3%)]/0 group-hover:bg-[hsl(0,0%,3%)]/20 transition-all duration-500" />
-                    {artwork.sold && (
-                      <div className="absolute top-4 right-4 bg-[hsl(0,0%,3%)]/80 text-white font-body text-[10px] tracking-[0.2em] uppercase px-3 py-1">
-                        Sold
-                      </div>
-                    )}
-                  </div>
-                  <h3 className="font-display text-sm sm:text-lg font-medium mb-0.5 sm:mb-1 group-hover:text-accent transition-colors duration-300 line-clamp-1">
-                    {artwork.title}
-                  </h3>
-                  <p className="font-accent text-xs sm:text-sm text-muted-foreground italic">
-                    {artwork.medium}, {artwork.year}
-                  </p>
-                  {artwork.price && !artwork.sold && (
-                    <p className="font-body text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">
-                      ${artwork.price.toLocaleString()}
+          {isLoading ? (
+            <p className="font-body text-muted-foreground text-center py-20">Loading artworks...</p>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
+              {filtered.map((artwork, i) => (
+                <motion.div
+                  key={artwork.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.05 }}
+                >
+                  <Link to={`/gallery/${artwork.id}`} className="group block">
+                    <div className="relative overflow-hidden mb-2 sm:mb-4">
+                      <img
+                        src={artwork.image_url}
+                        alt={artwork.title}
+                        className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-[hsl(0,0%,3%)]/0 group-hover:bg-[hsl(0,0%,3%)]/20 transition-all duration-500" />
+                      {artwork.sold && (
+                        <div className="absolute top-4 right-4 bg-[hsl(0,0%,3%)]/80 text-white font-body text-[10px] tracking-[0.2em] uppercase px-3 py-1">
+                          Sold
+                        </div>
+                      )}
+                    </div>
+                    <h3 className="font-display text-sm sm:text-lg font-medium mb-0.5 sm:mb-1 group-hover:text-accent transition-colors duration-300 line-clamp-1">
+                      {artwork.title}
+                    </h3>
+                    <p className="font-accent text-xs sm:text-sm text-muted-foreground italic">
+                      {artwork.medium}, {artwork.year}
                     </p>
-                  )}
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+                    {artwork.price && !artwork.sold && (
+                      <p className="font-body text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">
+                        ${Number(artwork.price).toLocaleString()}
+                      </p>
+                    )}
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </main>
 

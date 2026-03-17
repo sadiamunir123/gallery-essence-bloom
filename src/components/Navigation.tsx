@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Search } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
-import { artworks } from "@/data/artworks";
+import { useArtworks } from "@/hooks/use-artworks";
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -17,6 +17,7 @@ interface NavigationProps {
 }
 
 const Navigation = ({ variant = "dark" }: NavigationProps) => {
+  const { data: artworks = [] } = useArtworks();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -163,7 +164,7 @@ const Navigation = ({ variant = "dark" }: NavigationProps) => {
                           className="w-full flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-muted/60 transition-colors text-left"
                         >
                           <img
-                            src={artwork.image}
+                            src={artwork.image_url}
                             alt={artwork.title}
                             className="w-12 h-12 object-cover rounded"
                           />
