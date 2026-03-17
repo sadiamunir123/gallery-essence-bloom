@@ -13,6 +13,7 @@ const navItems = [
 ];
 
 const Navbar = () => {
+  const { data: artworks = [] } = useArtworks();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
