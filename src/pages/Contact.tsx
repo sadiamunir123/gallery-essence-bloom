@@ -4,18 +4,29 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent",
-      description: "Thank you for reaching out! I'll get back to you shortly.",
+    setSubmitting(true);
+    const { error } = await supabase.from("contact_submissions").insert({
+      name: form.name,
+      email: form.email,
+      subject: form.subject,
+      message: form.message,
     });
-    setForm({ name: "", email: "", subject: "", message: "" });
+    setSubmitting(false);
+    if (error) {
+      toast({ title: "Error", description: "Failed to send message. Please try again.", variant: "destructive" });
+    } else {
+      toast({ title: "Message Sent", description: "Thank you for reaching out! I'll get back to you shortly." });
+      setForm({ name: "", email: "", subject: "", message: "" });
+    }
   };
 
   return (
@@ -41,7 +52,6 @@ const Contact = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-12 lg:gap-16">
-            {/* Contact Info */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -87,7 +97,6 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            {/* Contact Form */}
             <motion.form
               onSubmit={handleSubmit}
               initial={{ opacity: 0, y: 20 }}
@@ -97,67 +106,32 @@ const Contact = () => {
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="font-body text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2 block">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-card border border-border font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors"
-                    placeholder="Your name"
-                  />
+                  <label className="font-body text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2 block">Name</label>
+                  <input type="text" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full px-4 py-3 bg-card border border-border font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors" placeholder="Your name" />
                 </div>
                 <div>
-                  <label className="font-body text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2 block">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    className="w-full px-4 py-3 bg-card border border-border font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors"
-                    placeholder="your@email.com"
-                  />
+                  <label className="font-body text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2 block">Email</label>
+                  <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full px-4 py-3 bg-card border border-border font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors" placeholder="your@email.com" />
                 </div>
               </div>
 
               <div>
-                <label className="font-body text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2 block">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={form.subject}
-                  onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                  className="w-full px-4 py-3 bg-card border border-border font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors"
-                  placeholder="Commission, Purchase, or General Inquiry"
-                />
+                <label className="font-body text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2 block">Subject</label>
+                <input type="text" required value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} className="w-full px-4 py-3 bg-card border border-border font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors" placeholder="Commission, Purchase, or General Inquiry" />
               </div>
 
               <div>
-                <label className="font-body text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2 block">
-                  Message
-                </label>
-                <textarea
-                  required
-                  rows={6}
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  className="w-full px-4 py-3 bg-card border border-border font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors resize-none"
-                  placeholder="Tell me about your vision..."
-                />
+                <label className="font-body text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2 block">Message</label>
+                <textarea required rows={6} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className="w-full px-4 py-3 bg-card border border-border font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-accent transition-colors resize-none" placeholder="Tell me about your vision..." />
               </div>
 
               <button
                 type="submit"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 font-body text-sm tracking-[0.2em] uppercase bg-foreground text-primary-foreground px-8 py-3.5 hover:opacity-80 transition-opacity active:scale-[0.98]"
+                disabled={submitting}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 font-body text-sm tracking-[0.2em] uppercase bg-foreground text-primary-foreground px-8 py-3.5 hover:opacity-80 transition-opacity active:scale-[0.98] disabled:opacity-50"
               >
                 <Send size={14} />
-                Send Message
+                {submitting ? "Sending..." : "Send Message"}
               </button>
             </motion.form>
           </div>

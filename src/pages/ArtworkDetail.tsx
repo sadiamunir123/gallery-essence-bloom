@@ -2,13 +2,13 @@ import { useParams, Link } from "react-router-dom";
 import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ZoomIn, ZoomOut, Maximize2, X } from "lucide-react";
-import { artworks } from "@/data/artworks";
+import { useArtwork } from "@/hooks/use-artworks";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const ArtworkDetail = () => {
   const { id } = useParams();
-  const artwork = artworks.find((a) => a.id === id);
+  const { data: artwork, isLoading } = useArtwork(id);
   const [zoomOpen, setZoomOpen] = useState(false);
   const [scale, setScale] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -43,6 +43,15 @@ const ArtworkDetail = () => {
   const handleMouseUp = () => setDragging(false);
   const resetZoom = () => { setScale(1); setPosition({ x: 0, y: 0 }); };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Navbar />
+        <p className="font-body text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
+
   if (!artwork) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -73,7 +82,7 @@ const ArtworkDetail = () => {
               transition={{ duration: 0.8 }}
               className="relative group"
             >
-              <img src={artwork.image} alt={artwork.title} className="w-full object-cover" />
+              <img src={artwork.image_url} alt={artwork.title} className="w-full object-cover" />
               <button
                 onClick={() => { setZoomOpen(true); resetZoom(); }}
                 className="absolute bottom-4 right-4 bg-[hsl(0,0%,3%)]/70 text-white p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -110,7 +119,7 @@ const ArtworkDetail = () => {
                 <div>
                   {artwork.price && (
                     <p className="font-display text-2xl mb-4">
-                      ${artwork.price.toLocaleString()}
+                      ${Number(artwork.price).toLocaleString()}
                     </p>
                   )}
                   <Link
@@ -126,7 +135,6 @@ const ArtworkDetail = () => {
         </div>
       </main>
 
-      {/* Zoom Overlay */}
       {zoomOpen && (
         <div className="fixed inset-0 z-[70] bg-[hsl(0,0%,3%)] flex flex-col">
           <div className="flex items-center justify-between px-6 py-4">
@@ -148,7 +156,7 @@ const ArtworkDetail = () => {
             onMouseLeave={handleMouseUp}
           >
             <img
-              src={artwork.image}
+              src={artwork.image_url}
               alt={artwork.title}
               className="max-h-full max-w-full select-none"
               draggable={false}
