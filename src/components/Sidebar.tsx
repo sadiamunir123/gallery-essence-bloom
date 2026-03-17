@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, Image, User, Briefcase, Search, X, Menu } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
-import { artworks } from "@/data/artworks";
+import { useArtworks } from "@/hooks/use-artworks";
 
 const navItems = [
   { label: "Home", path: "/", icon: Home },
