@@ -13,6 +13,7 @@ const navItems = [
 ];
 
 const Sidebar = () => {
+  const { data: artworks = [] } = useArtworks();
   const location = useLocation();
   const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);

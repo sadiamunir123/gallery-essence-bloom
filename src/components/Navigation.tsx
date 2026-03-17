@@ -17,6 +17,7 @@ interface NavigationProps {
 }
 
 const Navigation = ({ variant = "dark" }: NavigationProps) => {
+  const { data: artworks = [] } = useArtworks();
   const location = useLocation();
   const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(false);
