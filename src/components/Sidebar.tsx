@@ -202,7 +202,7 @@ const Sidebar = () => {
                         className="w-full flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-muted/60 transition-colors text-left"
                       >
                         <img
-                          src={artwork.image}
+                          src={artwork.image_url}
                           alt={artwork.title}
                           className="w-11 h-11 object-cover rounded"
                         />

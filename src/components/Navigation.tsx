@@ -163,7 +163,7 @@ const Navigation = ({ variant = "dark" }: NavigationProps) => {
                           className="w-full flex items-center gap-4 px-3 py-3 rounded-lg hover:bg-muted/60 transition-colors text-left"
                         >
                           <img
-                            src={artwork.image}
+                            src={artwork.image_url}
                             alt={artwork.title}
                             className="w-12 h-12 object-cover rounded"
                           />
