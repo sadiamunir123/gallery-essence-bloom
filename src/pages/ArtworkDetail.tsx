@@ -144,12 +144,21 @@ const ArtworkDetail = () => {
                       ${Number(artwork.price).toLocaleString()}
                     </p>
                   )}
-                  <Link
-                    to="/contact"
-                    className="inline-block font-body text-sm tracking-[0.2em] uppercase bg-foreground text-primary-foreground px-8 py-3 hover:opacity-80 transition-opacity"
-                  >
-                    Inquire
-                  </Link>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={handlePurchase}
+                      disabled={purchasing}
+                      className="inline-block font-body text-sm tracking-[0.2em] uppercase bg-accent text-accent-foreground px-8 py-3 hover:opacity-80 transition-opacity disabled:opacity-50"
+                    >
+                      {purchasing ? "Processing..." : "Buy Now"}
+                    </button>
+                    <Link
+                      to="/contact"
+                      className="inline-block font-body text-sm tracking-[0.2em] uppercase border border-border text-foreground px-8 py-3 hover:bg-muted transition-colors"
+                    >
+                      Inquire
+                    </Link>
+                  </div>
                 </div>
               )}
             </motion.div>
