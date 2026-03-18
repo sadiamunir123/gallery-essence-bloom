@@ -148,7 +148,7 @@ const Navigation = ({ variant = "dark" }: NavigationProps) => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search artworks, categories, mediums..."
-                  className="w-full pl-12 pr-4 py-3 bg-muted/50 border border-border rounded-lg font-body text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/40 transition-all"
+                  className="w-full pl-12 pr-4 py-3 bg-muted/50 border border-border rounded-lg font-body text-sm text-primary placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/40 transition-all"
                 />
               </div>
 
