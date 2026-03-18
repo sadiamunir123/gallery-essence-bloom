@@ -126,11 +126,10 @@ const ArtworkDetail = () => {
                   )}
                   <div className="flex gap-3">
                     <button
-                      onClick={handlePurchase}
-                      disabled={purchasing}
-                      className="inline-block font-body text-sm tracking-[0.2em] uppercase bg-accent text-accent-foreground px-8 py-3 hover:opacity-80 transition-opacity disabled:opacity-50"
+                      onClick={() => setCheckoutOpen(true)}
+                      className="inline-block font-body text-sm tracking-[0.2em] uppercase bg-accent text-accent-foreground px-8 py-3 hover:opacity-90 transition-opacity"
                     >
-                      {purchasing ? "Processing..." : "Buy Now"}
+                      Buy Now
                     </button>
                     <Link
                       to="/contact"
