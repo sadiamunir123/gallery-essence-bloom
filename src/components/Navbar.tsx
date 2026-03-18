@@ -135,7 +135,7 @@ const Navbar = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search artworks, categories, mediums..."
-                  className="w-full pl-11 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--accent))]/40 transition-all"
+                  className="w-full pl-11 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[hsl(var(--accent))]/40 transition-all caret-white"
                 />
               </div>
               {searchQuery.trim() && (

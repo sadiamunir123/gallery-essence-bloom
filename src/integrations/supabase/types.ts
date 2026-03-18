@@ -119,6 +119,50 @@ export type Database = {
         }
         Relationships: []
       }
+      orders: {
+        Row: {
+          artwork_id: string
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          id: string
+          shipping_address: string
+          status: string
+          total_amount: number
+        }
+        Insert: {
+          artwork_id: string
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          customer_phone?: string | null
+          id?: string
+          shipping_address: string
+          status?: string
+          total_amount: number
+        }
+        Update: {
+          artwork_id?: string
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string | null
+          id?: string
+          shipping_address?: string
+          status?: string
+          total_amount?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_artwork_id_fkey"
+            columns: ["artwork_id"]
+            isOneToOne: false
+            referencedRelation: "artworks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
