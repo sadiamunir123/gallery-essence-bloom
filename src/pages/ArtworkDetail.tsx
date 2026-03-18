@@ -3,41 +3,21 @@ import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, ZoomIn, ZoomOut, Maximize2, X } from "lucide-react";
 import { useArtwork } from "@/hooks/use-artworks";
-import { supabase } from "@/integrations/supabase/client";
-import { useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CheckoutDialog from "@/components/CheckoutDialog";
 
 const ArtworkDetail = () => {
   const { id } = useParams();
   const { data: artwork, isLoading } = useArtwork(id);
-  const queryClient = useQueryClient();
   const [zoomOpen, setZoomOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [scale, setScale] = useState(1);
-  const [purchasing, setPurchasing] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const dragStart = useRef({ x: 0, y: 0 });
   const posStart = useRef({ x: 0, y: 0 });
-
-  const handlePurchase = async () => {
-    if (!id) return;
-    setPurchasing(true);
-    const { error } = await supabase
-      .from("artworks")
-      .update({ sold: true })
-      .eq("id", id);
-    if (error) {
-      toast.error("Purchase failed. Please try again.");
-    } else {
-      toast.success("Artwork purchased successfully! It is now marked as Sold.");
-      queryClient.invalidateQueries({ queryKey: ["artwork", id] });
-      queryClient.invalidateQueries({ queryKey: ["artworks"] });
-    }
-    setPurchasing(false);
-  };
 
   const handleZoomIn = () => setScale((s) => Math.min(s + 0.5, 5));
   const handleZoomOut = () => setScale((s) => Math.max(s - 0.5, 1));
