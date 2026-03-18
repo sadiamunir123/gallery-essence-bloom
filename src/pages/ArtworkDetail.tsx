@@ -179,6 +179,14 @@ const ArtworkDetail = () => {
         </div>
       )}
 
+      {artwork && (
+        <CheckoutDialog
+          artwork={artwork}
+          open={checkoutOpen}
+          onClose={() => setCheckoutOpen(false)}
+        />
+      )}
+
       <Footer />
     </div>
   );
