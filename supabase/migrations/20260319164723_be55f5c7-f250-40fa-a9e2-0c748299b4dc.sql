@@ -1,0 +1,1 @@
+UPDATE artworks SET sold = false WHERE sold = true;
